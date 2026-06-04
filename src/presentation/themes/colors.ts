@@ -1,87 +1,57 @@
-// Material Design 3 Color System
-
-export const lightColors = {
-  // Primary
-  primary: '#6366F1',
+export const COLORS_LIGHT = {
+  primary: '#6200EE',
   onPrimary: '#FFFFFF',
-  primaryContainer: '#E0E7FF',
-  onPrimaryContainer: '#1E1B4B',
-
-  // Secondary
-  secondary: '#7C3AED',
-  onSecondary: '#FFFFFF',
-  secondaryContainer: '#F3E8FF',
-  onSecondaryContainer: '#2D1B4E',
-
-  // Tertiary
-  tertiary: '#EC4899',
+  primaryContainer: '#EADDFF',
+  onPrimaryContainer: '#370B1E',
+  secondary: '#03DAC6',
+  onSecondary: '#000000',
+  secondaryContainer: '#005047',
+  onSecondaryContainer: '#A3F8F3',
+  tertiary: '#BB86FC',
   onTertiary: '#FFFFFF',
-  tertiaryContainer: '#FFE0F0',
-  onTertiaryContainer: '#501A3A',
-
-  // Surface
-  surface: '#FFFBFE',
-  onSurface: '#1F1F1F',
-  surfaceVariant: '#ECE6F0',
-  onSurfaceVariant: '#49454E',
-
-  // Background
-  background: '#FFFBFE',
-  onBackground: '#1F1F1F',
-
-  // Error
-  error: '#F2231C',
+  tertiaryContainer: '#EADDFF',
+  onTertiaryContainer: '#370B1E',
+  error: '#B3261E',
   onError: '#FFFFFF',
   errorContainer: '#F9DEDC',
   onErrorContainer: '#410E0B',
-
-  // Outline
+  background: '#FFFBFE',
+  onBackground: '#1C1B1F',
+  surface: '#FFFBFE',
+  onSurface: '#1C1B1F',
+  surfaceVariant: '#E7E0EC',
+  onSurfaceVariant: '#49454E',
   outline: '#79747E',
-  outlineVariant: '#CAC7D0',
-
-  // Scrim
+  outlineVariant: '#CAC4D0',
+  shadow: '#000000',
   scrim: '#000000',
 };
 
-export const darkColors = {
-  // Primary
-  primary: '#C5D9FF',
-  onPrimary: '#0D0043',
-  primaryContainer: '#4A40D6',
-  onPrimaryContainer: '#E0E7FF',
-
-  // Secondary
-  secondary: '#E9D5FF',
-  onSecondary: '#4A1B73',
-  secondaryContainer: '#5F3B99',
-  onSecondaryContainer: '#F3E8FF',
-
-  // Tertiary
-  tertiary: '#FFB8DB',
-  onTertiary: '#6B2447',
-  tertiaryContainer: '#A43861',
-  onTertiaryContainer: '#FFE0F0',
-
-  // Surface
-  surface: '#131313',
-  onSurface: '#F5F5F5',
-  surfaceVariant: '#49454E',
-  onSurfaceVariant: '#CAC7D0',
-
-  // Background
-  background: '#0F0F0F',
-  onBackground: '#F5F5F5',
-
-  // Error
+export const COLORS_DARK = {
+  primary: '#BB86FC',
+  onPrimary: '#370B1E',
+  primaryContainer: '#540D6B',
+  onPrimaryContainer: '#EADDFF',
+  secondary: '#03DAC6',
+  onSecondary: '#003635',
+  secondaryContainer: '#005047',
+  onSecondaryContainer: '#A3F8F3',
+  tertiary: '#BB86FC',
+  onTertiary: '#370B1E',
+  tertiaryContainer: '#540D6B',
+  onTertiaryContainer: '#EADDFF',
   error: '#F2B8B5',
   onError: '#601410',
   errorContainer: '#8C1D18',
   onErrorContainer: '#F9DEDC',
-
-  // Outline
+  background: '#1C1B1F',
+  onBackground: '#E7E0EC',
+  surface: '#1C1B1F',
+  onSurface: '#E7E0EC',
+  surfaceVariant: '#49454E',
+  onSurfaceVariant: '#CAC4D0',
   outline: '#938F99',
   outlineVariant: '#49454E',
-
-  // Scrim
+  shadow: '#000000',
   scrim: '#000000',
 };

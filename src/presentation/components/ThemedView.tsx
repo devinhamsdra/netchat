@@ -1,29 +1,37 @@
-import { View, ViewProps, StyleSheet } from 'react-native';
-import { useTheme } from '@themes/index';
+import React from 'react';
+import { View, ViewStyle, StyleSheet } from 'react-native';
+import { useTheme } from './useTheme';
+import { spacing } from './spacing';
 
-interface ThemedViewProps extends ViewProps {
-  variant?: 'surface' | 'background' | 'container';
+interface ThemedViewProps {
+  children: React.ReactNode;
+  variant?: 'background' | 'surface' | 'surfaceVariant';
+  style?: ViewStyle;
 }
 
-export const ThemedView = ({ variant = 'surface', style, ...props }: ThemedViewProps) => {
+export const ThemedView: React.FC<ThemedViewProps> = ({
+  children,
+  variant = 'surface',
+  style,
+}) => {
   const theme = useTheme();
 
-  const backgroundColor =
-    variant === 'surface'
-      ? theme.colors.surface
-      : variant === 'background'
-        ? theme.colors.background
-        : theme.colors.primaryContainer;
+  const getBackgroundColor = () => {
+    switch (variant) {
+      case 'background':
+        return theme.colors.background;
+      case 'surface':
+        return theme.colors.surface;
+      case 'surfaceVariant':
+        return theme.colors.surfaceVariant;
+      default:
+        return theme.colors.background;
+    }
+  };
 
   return (
-    <View
-      {...props}
-      style={[
-        {
-          backgroundColor,
-        },
-        style,
-      ]}
-    />
+    <View style={[{ backgroundColor: getBackgroundColor() }, style]}>
+      {children}
+    </View>
   );
 };

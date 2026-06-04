@@ -1,90 +1,120 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   TextInput,
-  StyleSheet,
   View,
-  TextInputProps,
-  Text,
   ViewStyle,
+  TextInputProps,
+  StyleSheet,
 } from 'react-native';
-import { useTheme } from '@themes/index';
-import { spacing, borderRadius } from '@themes/spacing';
+import { ThemedText } from './ThemedText';
+import { useTheme } from '../themes/useTheme';
+import { spacing } from '../themes/spacing';
 
 interface InputProps extends TextInputProps {
   label?: string;
+  placeholder?: string;
   error?: string;
-  containerStyle?: ViewStyle;
   helper?: string;
+  containerStyle?: ViewStyle;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
-export const Input = ({
+export const Input: React.FC<InputProps> = ({
   label,
+  placeholder,
   error,
-  containerStyle,
   helper,
+  containerStyle,
+  leftIcon,
+  rightIcon,
+  style,
   ...props
-}: InputProps) => {
+}) => {
   const theme = useTheme();
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <View style={containerStyle}>
       {label && (
-        <Text
-          style={{
-            fontSize: 12,
-            fontWeight: '600',
-            color: theme.colors.onSurface,
-            marginBottom: spacing.sm,
-          }}
+        <ThemedText
+          variant="labelMedium"
+          weight="medium"
+          style={{ marginBottom: spacing.sm }}
         >
           {label}
-        </Text>
+        </ThemedText>
       )}
-      <TextInput
-        {...props}
+      <View
         style={[
-          styles.input,
+          styles.inputContainer,
           {
-            borderColor: error ? theme.colors.error : theme.colors.outline,
+            borderColor: error
+              ? theme.colors.error
+              : isFocused
+              ? theme.colors.primary
+              : theme.colors.outline,
             backgroundColor: theme.colors.surface,
-            color: theme.colors.onSurface,
           },
-          props.style,
         ]}
-        placeholderTextColor={theme.colors.onSurfaceVariant}
-      />
+      >
+        {leftIcon && <View style={styles.iconLeft}>{leftIcon}</View>}
+        <TextInput
+          style={[
+            styles.input,
+            {
+              color: theme.colors.onSurface,
+              flex: 1,
+            },
+            style,
+          ]}
+          placeholder={placeholder}
+          placeholderTextColor={theme.colors.onSurfaceVariant}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          {...props}
+        />
+        {rightIcon && <View style={styles.iconRight}>{rightIcon}</View>}
+      </View>
       {error && (
-        <Text
-          style={{
-            fontSize: 12,
-            color: theme.colors.error,
-            marginTop: spacing.xs,
-          }}
+        <ThemedText
+          variant="labelSmall"
+          color={theme.colors.error}
+          style={{ marginTop: spacing.xs }}
         >
           {error}
-        </Text>
+        </ThemedText>
       )}
       {helper && !error && (
-        <Text
-          style={{
-            fontSize: 12,
-            color: theme.colors.onSurfaceVariant,
-            marginTop: spacing.xs,
-          }}
+        <ThemedText
+          variant="labelSmall"
+          color={theme.colors.onSurfaceVariant}
+          style={{ marginTop: spacing.xs }}
         >
           {helper}
-        </Text>
+        </ThemedText>
       )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.md,
-    borderRadius: borderRadius.md,
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderWidth: 1,
-    fontSize: 14,
+    borderRadius: 8,
+    paddingHorizontal: spacing.md,
+    height: 48,
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+  },
+  iconLeft: {
+    marginRight: spacing.sm,
+  },
+  iconRight: {
+    marginLeft: spacing.sm,
   },
 });

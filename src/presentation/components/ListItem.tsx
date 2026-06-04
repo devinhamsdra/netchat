@@ -1,48 +1,53 @@
 import React from 'react';
 import {
-  TouchableOpacity,
   View,
+  TouchableOpacity,
   StyleSheet,
-  TouchableOpacityProps,
+  ViewStyle,
+  GestureResponderEvent,
 } from 'react-native';
-import { useTheme } from '@themes/index';
-import { spacing, borderRadius } from '@themes/spacing';
 import { ThemedText } from './ThemedText';
+import { useTheme } from '../themes/useTheme';
+import { spacing } from '../themes/spacing';
+import MaterialIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-interface ListItemProps extends TouchableOpacityProps {
+interface ListItemProps {
   title: string;
   subtitle?: string;
   leftElement?: React.ReactNode;
   rightElement?: React.ReactNode;
-  onPress?: () => void;
+  onPress?: (event: GestureResponderEvent) => void;
+  style?: ViewStyle;
 }
 
-export const ListItem = ({
+export const ListItem: React.FC<ListItemProps> = ({
   title,
   subtitle,
   leftElement,
   rightElement,
   onPress,
-  ...props
-}: ListItemProps) => {
+  style,
+}) => {
   const theme = useTheme();
 
   return (
     <TouchableOpacity
-      {...props}
-      onPress={onPress}
-      activeOpacity={0.7}
       style={[
         styles.container,
         {
-          backgroundColor: theme.colors.surface,
           borderBottomColor: theme.colors.outline,
+          paddingHorizontal: spacing.lg,
+          paddingVertical: spacing.md,
         },
+        style,
       ]}
+      onPress={onPress}
     >
       {leftElement && <View style={styles.leftElement}>{leftElement}</View>}
       <View style={styles.content}>
-        <ThemedText variant="titleMedium">{title}</ThemedText>
+        <ThemedText variant="bodyMedium" weight="medium">
+          {title}
+        </ThemedText>
         {subtitle && (
           <ThemedText
             variant="bodySmall"
@@ -53,7 +58,15 @@ export const ListItem = ({
           </ThemedText>
         )}
       </View>
-      {rightElement && <View style={styles.rightElement}>{rightElement}</View>}
+      {rightElement ? (
+        <View style={styles.rightElement}>{rightElement}</View>
+      ) : (
+        <MaterialIcons
+          name="chevron-right"
+          size={24}
+          color={theme.colors.onSurfaceVariant}
+        />
+      )}
     </TouchableOpacity>
   );
 };
@@ -62,8 +75,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
     borderBottomWidth: 1,
   },
   leftElement: {

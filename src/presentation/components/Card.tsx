@@ -1,28 +1,25 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  ViewProps,
-} from 'react-native';
-import { useTheme } from '@themes/index';
-import { spacing, borderRadius } from '@themes/spacing';
+import { View, StyleSheet, ViewStyle } from 'react-native';
+import { useTheme } from '../themes/useTheme';
+import { spacing } from '../themes/spacing';
 
-interface CardProps extends ViewProps {
+interface CardProps {
   children: React.ReactNode;
-  onPress?: () => void;
+  style?: ViewStyle;
+  elevated?: boolean;
 }
 
-export const Card = ({ children, style, ...props }: CardProps) => {
+export const Card: React.FC<CardProps> = ({ children, style, elevated = true }) => {
   const theme = useTheme();
 
   return (
     <View
-      {...props}
       style={[
         styles.card,
         {
           backgroundColor: theme.colors.surface,
-          ...theme.elevation.level1,
+          borderColor: theme.colors.outline,
+          shadowColor: elevated ? theme.colors.shadow : 'transparent',
         },
         style,
       ]}
@@ -34,8 +31,12 @@ export const Card = ({ children, style, ...props }: CardProps) => {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: borderRadius.lg,
+    borderRadius: 12,
+    borderWidth: 1,
     padding: spacing.lg,
-    marginBottom: spacing.md,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
 });

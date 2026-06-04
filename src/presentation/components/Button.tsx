@@ -1,64 +1,48 @@
 import React from 'react';
 import {
   TouchableOpacity,
-  Text,
-  StyleSheet,
   TouchableOpacityProps,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
-import { useTheme } from '@themes/index';
-import { spacing, borderRadius } from '@themes/spacing';
-
-type ButtonVariant = 'filled' | 'outlined' | 'text';
-type ButtonSize = 'small' | 'medium' | 'large';
+import { ThemedText } from './ThemedText';
+import { useTheme } from '../themes/useTheme';
+import { spacing } from '../themes/spacing';
 
 interface ButtonProps extends TouchableOpacityProps {
   label: string;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
+  variant?: 'contained' | 'outlined' | 'text';
+  size?: 'small' | 'medium' | 'large';
   isLoading?: boolean;
   disabled?: boolean;
-  icon?: React.ReactNode;
 }
 
-export const Button = ({
+export const Button: React.FC<ButtonProps> = ({
   label,
-  variant = 'filled',
+  variant = 'contained',
   size = 'medium',
   isLoading = false,
   disabled = false,
-  icon,
+  style,
   ...props
-}: ButtonProps) => {
+}) => {
   const theme = useTheme();
 
   const sizeStyles = {
-    small: {
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm,
-      minHeight: 32,
-    },
-    medium: {
-      paddingHorizontal: spacing.lg,
-      paddingVertical: spacing.md,
-      minHeight: 40,
-    },
-    large: {
-      paddingHorizontal: spacing.xl,
-      paddingVertical: spacing.lg,
-      minHeight: 48,
-    },
+    small: styles.small,
+    medium: styles.medium,
+    large: styles.large,
   };
 
   const variantStyles = {
-    filled: {
-      backgroundColor: disabled ? theme.colors.outlineVariant : theme.colors.primary,
+    contained: {
+      backgroundColor: theme.colors.primary,
       borderWidth: 0,
     },
     outlined: {
       backgroundColor: 'transparent',
       borderWidth: 1,
-      borderColor: disabled ? theme.colors.outlineVariant : theme.colors.outline,
+      borderColor: theme.colors.primary,
     },
     text: {
       backgroundColor: 'transparent',
@@ -67,44 +51,30 @@ export const Button = ({
   };
 
   const textColor =
-    variant === 'filled'
-      ? theme.colors.onPrimary
-      : variant === 'outlined'
-        ? disabled
-          ? theme.colors.outlineVariant
-          : theme.colors.primary
-        : theme.colors.primary;
+    variant === 'contained' ? theme.colors.onPrimary : theme.colors.primary;
 
   return (
     <TouchableOpacity
-      {...props}
-      disabled={disabled || isLoading}
       style={[
         styles.button,
         sizeStyles[size],
         variantStyles[variant],
-        { opacity: disabled ? 0.5 : 1 },
-        props.style,
+        disabled && styles.disabled,
+        style,
       ]}
-      activeOpacity={0.7}
+      disabled={disabled || isLoading}
+      {...props}
     >
       {isLoading ? (
         <ActivityIndicator color={textColor} />
       ) : (
-        <>
-          {icon && <>{icon}</> }
-          <Text
-            style={[
-              styles.label,
-              {
-                color: textColor,
-                marginLeft: icon ? spacing.sm : 0,
-              },
-            ]}
-          >
-            {label}
-          </Text>
-        </>
+        <ThemedText
+          color={textColor}
+          weight="semibold"
+          variant={size === 'small' ? 'labelMedium' : 'labelLarge'}
+        >
+          {label}
+        </ThemedText>
       )}
     </TouchableOpacity>
   );
@@ -112,13 +82,24 @@ export const Button = ({
 
 const styles = StyleSheet.create({
   button: {
-    flexDirection: 'row',
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: borderRadius.md,
+    transition: 'all 0.2s',
   },
-  label: {
-    fontSize: 14,
-    fontWeight: '600',
+  small: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+  },
+  medium: {
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
+  },
+  large: {
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.lg,
+  },
+  disabled: {
+    opacity: 0.5,
   },
 });

@@ -1,37 +1,59 @@
-import { Text, StyleSheet, TextProps } from 'react-native';
-import { useTheme } from '@themes/index';
-import { typography } from '@themes/typography';
+import React from 'react';
+import { Text, TextProps, StyleSheet } from 'react-native';
+import { useTheme } from '../themes/useTheme';
+import { typography } from './typography';
 
-type TypographyVariant = keyof typeof typography;
+type Variant =
+  | 'displayLarge'
+  | 'displayMedium'
+  | 'displaySmall'
+  | 'headlineLarge'
+  | 'headlineMedium'
+  | 'headlineSmall'
+  | 'titleLarge'
+  | 'titleMedium'
+  | 'titleSmall'
+  | 'bodyLarge'
+  | 'bodyMedium'
+  | 'bodySmall'
+  | 'labelLarge'
+  | 'labelMedium'
+  | 'labelSmall';
 
 interface ThemedTextProps extends TextProps {
-  variant?: TypographyVariant;
+  variant?: Variant;
   color?: string;
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold';
 }
 
-export const ThemedText = ({
+export const ThemedText: React.FC<ThemedTextProps> = ({
   variant = 'bodyMedium',
   color,
+  weight = 'regular',
   style,
+  children,
   ...props
-}: ThemedTextProps) => {
+}) => {
   const theme = useTheme();
-  const typographyStyle = typography[variant];
   const textColor = color || theme.colors.onSurface;
+
+  const fontWeight = {
+    regular: '400' as const,
+    medium: '500' as const,
+    semibold: '600' as const,
+    bold: '700' as const,
+  }[weight];
 
   return (
     <Text
-      {...props}
       style={[
-        {
-          fontSize: typographyStyle.fontSize,
-          lineHeight: typographyStyle.lineHeight,
-          fontWeight: typographyStyle.fontWeight,
-          letterSpacing: typographyStyle.letterSpacing,
-          color: textColor,
-        },
+        typography[variant],
+        { color: textColor, fontWeight },
         style,
       ]}
-    />
+      {...props}
+    >
+      {children}
+    </Text>
   );
 };

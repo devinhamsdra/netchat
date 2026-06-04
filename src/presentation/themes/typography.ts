@@ -1,0 +1,101 @@
+export const typography = {
+  // Display styles
+  displayLarge: {
+    fontSize: 57,
+    lineHeight: 64,
+    fontWeight: '400' as const,
+    letterSpacing: 0,
+  },
+  displayMedium: {
+    fontSize: 45,
+    lineHeight: 52,
+    fontWeight: '400' as const,
+    letterSpacing: 0,
+  },
+  displaySmall: {
+    fontSize: 36,
+    lineHeight: 44,
+    fontWeight: '400' as const,
+    letterSpacing: 0,
+  },
+
+  // Headline styles
+  headlineLarge: {
+    fontSize: 32,
+    lineHeight: 40,
+    fontWeight: '600' as const,
+    letterSpacing: 0,
+  },
+  headlineMedium: {
+    fontSize: 28,
+    lineHeight: 36,
+    fontWeight: '600' as const,
+    letterSpacing: 0,
+  },
+  headlineSmall: {
+    fontSize: 24,
+    lineHeight: 32,
+    fontWeight: '600' as const,
+    letterSpacing: 0,
+  },
+
+  // Title styles
+  titleLarge: {
+    fontSize: 22,
+    lineHeight: 28,
+    fontWeight: '600' as const,
+    letterSpacing: 0,
+  },
+  titleMedium: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '600' as const,
+    letterSpacing: 0.15,
+  },
+  titleSmall: {
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: '600' as const,
+    letterSpacing: 0.1,
+  },
+
+  // Body styles
+  bodyLarge: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '400' as const,
+    letterSpacing: 0.5,
+  },
+  bodyMedium: {
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: '400' as const,
+    letterSpacing: 0.25,
+  },
+  bodySmall: {
+    fontSize: 12,
+    lineHeight: 16,
+    fontWeight: '400' as const,
+    letterSpacing: 0.4,
+  },
+
+  // Label styles
+  labelLarge: {
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: '600' as const,
+    letterSpacing: 0.1,
+  },
+  labelMedium: {
+    fontSize: 12,
+    lineHeight: 16,
+    fontWeight: '600' as const,
+    letterSpacing: 0.5,
+  },
+  labelSmall: {
+    fontSize: 11,
+    lineHeight: 16,
+    fontWeight: '600' as const,
+    letterSpacing: 0.5,
+  },
+};

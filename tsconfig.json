@@ -1,0 +1,64 @@
+{
+  "extends": "expo/tsconfig",
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "target": "es2020",
+    "lib": [
+      "es2020",
+      "dom",
+      "dom.iterable"
+    ],
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/presentation/components/*"
+      ],
+      "@screens/*": [
+        "src/presentation/screens/*"
+      ],
+      "@navigation/*": [
+        "src/presentation/navigation/*"
+      ],
+      "@services/*": [
+        "src/domain/services/*"
+      ],
+      "@repositories/*": [
+        "src/data/repositories/*"
+      ],
+      "@models/*": [
+        "src/domain/models/*"
+      ],
+      "@hooks/*": [
+        "src/presentation/hooks/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@themes/*": [
+        "src/presentation/themes/*"
+      ],
+      "@store/*": [
+        "src/presentation/store/*"
+      ],
+      "@config/*": [
+        "src/config/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "app"
+  ]
+}

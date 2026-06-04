@@ -1,0 +1,55 @@
+# Expo
+.expo/
+.expo-shared/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Dependencies
+node_modules/
+.yarn/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+out/
+
+# Misc
+.env
+.env.local
+.env.*.local
+.DS_Store
+*.log
+*.log.*
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+.vs/
+
+# Firebase
+.firebase/
+.firebaserc
+
+# Local env files
+.env*.local
+google-services.json
+GoogleService-Info.plist
